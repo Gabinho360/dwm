@@ -1,0 +1,7 @@
+configuration {
+    font: "MesloLGS Nerd Font Mono 12";
+    show-icons: true;
+    icon-theme: "Papirus";
+    display-drun: "";
+}
+@theme "default.rasi"
