@@ -27,7 +27,7 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "󰊖", "", "" };
+static const char *tags[] = { "󰬺", "󰬻", "󰬼", "󰬽", "󰬾" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -38,12 +38,11 @@ static const Rule rules[] = {
 	{ "Alacritty",                NULL,     NULL,                 0,         0,          1,          0,         0 },
 	{ "Thunar",                   NULL,     NULL,                 0,         1,          0,          0,         0 },
 	{ "steam",                    NULL,     NULL,                 0,         1,          0,          0,         0 },
-	{ "pavucontrol",              NULL,     NULL,                 0,         1,          0,          0,         0 },
 	{ NULL,                       NULL,     "Event Tester",       0,         0,          0,          1,         -1 }, /* xev */
 };
 
 /* layout(s) */
-static const float mfact     = 0.6; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -86,13 +85,13 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,                            XK_k,                 movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,                            XK_j,                 movestack,      {.i = -1 } },
 	{ MODKEY,                                      XK_f,                 killclient,     {0} },
-	{ MODKEY,                                      XK_e,                 setlayout,      {.v = &layouts[0]} }, //tile
-	{ MODKEY,                                      XK_q,                 setlayout,      {.v = &layouts[2]} }, //monocle
+	{ MODKEY,                                      XK_e,                 setlayout,      {.v = &layouts[0]} }, 
+	{ MODKEY,                                      XK_q,                 setlayout,      {.v = &layouts[2]} }, 
 	{ MODKEY,                                      XK_0,                 view,           {.ui = ~0 } },
-	{ MODKEY,                                      XK_comma,             focusmon,       {.i = -1 } }, //unused
-	{ MODKEY,                                      XK_period,            focusmon,       {.i = +1 } }, //unused
-	{ MODKEY|ShiftMask,                            XK_comma,             tagmon,         {.i = -1 } }, //unused
-	{ MODKEY|ShiftMask,                            XK_period,            tagmon,         {.i = +1 } }, //unused
+	{ MODKEY,                                      XK_comma,             focusmon,       {.i = -1 } }, 
+	{ MODKEY,                                      XK_period,            focusmon,       {.i = +1 } }, 
+	{ MODKEY|ShiftMask,                            XK_comma,             tagmon,         {.i = -1 } }, 
+	{ MODKEY|ShiftMask,                            XK_period,            tagmon,         {.i = +1 } }, 
 	TAGKEYS(                                       XK_1,                 0)
 	TAGKEYS(                                       XK_2,                 1)
 	TAGKEYS(                                       XK_3,                 2)
@@ -106,12 +105,12 @@ static const Key keys[] = {
 static const Button buttons[] = {
 	/* click                event mask         button          function        argument */
 	{ ClkWinTitle,          0,                 Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,                 Button2,        spawn,          SHCMD("pavucontrol") },
+	{ ClkStatusText,        0,                 Button2,        spawn,          SHCMD("alacritty -e alsamixer") },
 	{ ClkClientWin,         MODKEY,            Button1,        moveorplace,    {.i = 1} },
 	{ ClkClientWin,         MODKEY,            Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,            Button3,        resizemouse,    {0} },
-        { ClkClientWin,         MODKEY,            Button4,        setcfact,       {.f = +0.25} }, // aumenta
-	{ ClkClientWin,         MODKEY,            Button5,        setcfact,       {.f = -0.25} }, // diminui
+        { ClkClientWin,         MODKEY,            Button4,        setcfact,       {.f = +0.25} },
+	{ ClkClientWin,         MODKEY,            Button5,        setcfact,       {.f = -0.25} },
 	{ ClkTagBar,            0,                 Button1,        view,           {0} },
 	{ ClkTagBar,            0,                 Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,            Button1,        tag,            {0} },
