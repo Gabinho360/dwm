@@ -93,7 +93,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,                                  XK_h,                           setcfact,       {.f = -0.25} },
 	{ MODKEY|ShiftMask,                                  XK_o,                           setcfact,       {.f =  0.00} },
 	{ MODKEY,                                            XK_Tab,                         view,           {0} },
-	{ MODKEY,                                            XK_q,                           killclient,     {0} },
+	{ MODKEY,                                            XK_c,                           killclient,     {0} },
 	{ MODKEY,                                            XK_d,                           setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                                            XK_e,                           setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                                            XK_comma,                       focusmon,       {.i = -1 } },
