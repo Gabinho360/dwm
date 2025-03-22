@@ -24,7 +24,6 @@ static const char *colors[][3]      = {
 };
 
 static const char *const autostart[] = {
-	"slstatus", NULL,
 	"sh", "-c", "feh --randomize --bg-fill ~/wp/*", NULL,
 	NULL /* terminate */
 };
