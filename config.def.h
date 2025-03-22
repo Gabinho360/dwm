@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int snap      = 10;       /* snap pixel */
+static const unsigned int snap      = 0;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
@@ -52,22 +52,10 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 #include "vanitygaps.c"
 
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
+	/* symbol     arrange      function */
+	{ "[]=",      tile },      /* first entry is default */
+	{ "><>",      NULL },      /* no layout function means floating behavior */
 	{ "[M]",      monocle },
-	{ "[@]",      spiral },
-	{ "[\\]",     dwindle },
-	{ "H[]",      deck },
-	{ "TTT",      bstack },
-	{ "===",      bstackhoriz },
-	{ "HHH",      grid },
-	{ "###",      nrowgrid },
-	{ "---",      horizgrid },
-	{ ":::",      gaplessgrid },
-	{ "|M|",      centeredmaster },
-	{ ">M>",      centeredfloatingmaster },
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ NULL,       NULL },
 };
 
 /* key definitions */
@@ -91,6 +79,9 @@ static const Key keys[] = {
 	/* modifier                                          key                             function        argument */
 	{ MODKEY,                                            XK_BackSpace,                   spawn,          {.v = launcher } },
 	{ MODKEY,                                            XK_Return,                      spawn,          {.v = terminal } },
+	{ MODKEY,                                            XK_w,                           spawn,          SHCMD ("feh --randomize --bg-fill ~/wp/*") },
+	{ MODKEY,                                            XK_equal,                       spawn,          SHCMD ("amixer set Master 5%+") },
+	{ MODKEY,                                            XK_minus,                       spawn,          SHCMD ("amixer set Master 5%-") },
 	{ MODKEY,                                            XK_Escape,                      togglebar,      {0} },
 	{ MODKEY,                                            XK_k,                           focusstack,     {.i = +1 } },
 	{ MODKEY,                                            XK_j,                           focusstack,     {.i = -1 } },
@@ -102,11 +93,9 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,                                  XK_h,                           setcfact,       {.f = -0.25} },
 	{ MODKEY|ShiftMask,                                  XK_o,                           setcfact,       {.f =  0.00} },
 	{ MODKEY,                                            XK_Tab,                         view,           {0} },
-	{ MODKEY,                                            XK_q,                           zoom,           {0} },
-	{ MODKEY,                                            XK_f,                           killclient,     {0} },
-	{ MODKEY,                                            XK_t,                           setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                                            XK_y,                           setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                                            XK_u,                           setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                                            XK_q,                           killclient,     {0} },
+	{ MODKEY,                                            XK_d,                           setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                                            XK_e,                           setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                                            XK_comma,                       focusmon,       {.i = -1 } },
 	{ MODKEY,                                            XK_period,                      focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,                                  XK_comma,                       tagmon,         {.i = -1 } },
@@ -116,14 +105,14 @@ static const Key keys[] = {
 	TAGKEYS(                                             XK_3,                                           2)
 	TAGKEYS(                                             XK_4,                                           3)
 	TAGKEYS(                                             XK_5,                                           4)
-	{ MODKEY|ControlMask|ShiftMask,                      XK_BackSpace,                   quit,           {0} },
+	{ MODKEY|ShiftMask,                                  XK_BackSpace,                   quit,           {0} },
 };
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	{ ClkStatusText,        0,              Button2,        spawn,          SHCMD("alacritty -e alsamixer") },
+	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
